@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy 32nd Monthsary, My Love 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:#ff4d8d; --rose:#ff85a9; --deep:#c9184a; --cream:#fff0f5; --ink:#4a0d25;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Poppins',sans-serif;color:var(--ink);
+    background:linear-gradient(160deg,#ffe3ec 0%,#ffc2d6 50%,#ff9ebc 100%);
+    background-attachment:fixed;overflow-x:hidden;
+  }
+  #hearts{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+  .heart{position:absolute;bottom:-40px;animation:rise linear forwards;opacity:.8}
+  @keyframes rise{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+  section{position:relative;z-index:1;padding:64px 20px;max-width:760px;margin:0 auto;text-align:center}
+  h1,h2{font-family:'Dancing Script',cursive;color:var(--deep)}
+  h1{font-size:clamp(2.6rem,11vw,4.5rem);line-height:1.1}
+  h2{font-size:clamp(2rem,8vw,3rem);margin-bottom:24px}
+
+  /* HERO */
+  .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:18px}
+  .big-heart{font-size:5rem;animation:beat 1.2s infinite}
+  @keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.25)}30%{transform:scale(1)}45%{transform:scale(1.18)}}
+  .badge{background:#fff;border-radius:999px;padding:8px 22px;font-weight:600;color:var(--pink);box-shadow:0 6px 20px rgba(201,24,74,.2)}
+  .typed{min-height:3.2em;font-size:1.05rem;font-weight:300;max-width:480px}
+  .btn{
+    border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:1rem;
+    padding:14px 28px;border-radius:999px;color:#fff;
+    background:linear-gradient(135deg,var(--pink),var(--deep));
+    box-shadow:0 8px 22px rgba(201,24,74,.35);transition:transform .2s;
+  }
+  .btn:active{transform:scale(.95)}
+  .scroll-hint{margin-top:10px;font-size:.85rem;opacity:.7;animation:bob 1.6s infinite}
+  @keyframes bob{50%{transform:translateY(8px)}}
+
+  /* COUNTER */
+  .counter{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .count-box{background:rgba(255,255,255,.75);border-radius:18px;padding:16px 4px;box-shadow:0 6px 18px rgba(201,24,74,.15)}
+  .count-box b{display:block;font-size:1.7rem;color:var(--deep)}
+  .count-box span{font-size:.7rem;text-transform:uppercase;letter-spacing:1px}
+
+  /* MUSIC BUTTON */
+  .music-btn{
+    position:fixed;top:14px;right:14px;z-index:40;width:48px;height:48px;border:none;border-radius:50%;
+    font-size:1.4rem;cursor:pointer;background:#fff;box-shadow:0 6px 18px rgba(201,24,74,.35);
+  }
+  .music-btn.playing{animation:spin 3s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* GALLERY */
+  .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .polaroid{
+    background:#fff;padding:10px 10px 14px;border-radius:6px;cursor:pointer;
+    box-shadow:0 8px 20px rgba(201,24,74,.25);transition:transform .3s;
+    opacity:0;transform:translateY(30px) rotate(var(--r));
+  }
+  .polaroid.show{opacity:1;transform:rotate(var(--r))}
+  .polaroid:active{transform:rotate(0) scale(1.04)}
+  .polaroid img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;border-radius:3px}
+  .polaroid p{margin-top:10px;font-family:'Dancing Script',cursive;font-size:1.25rem;color:var(--deep)}
+  .lightbox{
+    position:fixed;inset:0;background:rgba(74,13,37,.92);z-index:50;
+    display:none;align-items:center;justify-content:center;padding:20px;
+  }
+  .lightbox.on{display:flex}
+  .lightbox img{max-width:100%;max-height:90vh;border-radius:12px;box-shadow:0 10px 40px #000}
+
+  /* REASONS */
+  .cards{display:grid;gap:14px}
+  .card{
+    background:rgba(255,255,255,.8);border-radius:20px;padding:20px;text-align:left;
+    box-shadow:0 6px 18px rgba(201,24,74,.15);
+    opacity:0;transform:translateY(30px);transition:.7s;
+  }
+  .card.show{opacity:1;transform:none}
+  .card .num{font-family:'Dancing Script',cursive;font-size:1.6rem;color:var(--pink)}
+
+  /* FLIRTY QUESTION */
+  .question{background:rgba(255,255,255,.65);border-radius:28px;padding:36px 20px;box-shadow:0 10px 30px rgba(201,24,74,.2)}
+  .question p{margin-bottom:22px;font-size:1.1rem}
+  .btn-row{display:flex;gap:16px;justify-content:center;align-items:center;min-height:90px;position:relative}
+  .btn.no{background:#999;box-shadow:none}
+  #yesMsg{display:none;margin-top:18px;font-family:'Dancing Script',cursive;font-size:2rem;color:var(--deep)}
+
+  /* LETTER */
+  .envelope{font-size:4.5rem;cursor:pointer;display:inline-block;animation:beat 1.6s infinite}
+  .letter{
+    display:none;background:#fffafc;border-radius:20px;padding:28px 22px;margin-top:20px;text-align:left;
+    box-shadow:0 10px 30px rgba(201,24,74,.25);line-height:1.8;white-space:pre-line;
+    border-left:6px solid var(--pink);
+  }
+  .letter.open{display:block;animation:pop .6s}
+  @keyframes pop{from{opacity:0;transform:scale(.9)}}
+  footer{position:relative;z-index:1;text-align:center;padding:40px 20px 60px;font-size:.9rem}
+  footer .sig{font-family:'Dancing Script',cursive;font-size:1.8rem;color:var(--deep)}
+</style>
+</head>
+<body>
+<div id="hearts"></div>
+
+<!-- 🎵 Background music: put your mp3 next to index.html and name it music.mp3 -->
+<audio id="bgm" src="music.mp3" loop preload="auto"></audio>
+<button class="music-btn" id="musicBtn" onclick="toggleMusic()" aria-label="Play music">🎵</button>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="big-heart">💖</div>
+  <div class="badge">Charlaine &amp; Renz · 32 Months ✨</div>
+  <h1>Happy Monthsary,<br><span id="herName">My LoveLove</span>!</h1>
+  <p class="typed" id="typed"></p>
+  <button class="btn" onclick="burst()">Tap for a surprise 💘</button>
+  <div class="scroll-hint">scroll down, baby ↓</div>
+</section>
+
+<!-- ===== COUNTER ===== -->
+<section>
+  <h2>Our Time Together</h2>
+  <div class="counter">
+    <div class="count-box"><b id="cd">0</b><span>Days</span></div>
+    <div class="count-box"><b id="ch">0</b><span>Hours</span></div>
+    <div class="count-box"><b id="cm">0</b><span>Mins</span></div>
+    <div class="count-box"><b id="cs">0</b><span>Secs</span></div>
+  </div>
+  <p style="margin-top:18px;font-weight:300">…and I'd still choose you in every single one. 💞</p>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section id="gallerySec">
+  <h2>Our Little Memories 📸</h2>
+  <div class="gallery" id="gallery"></div>
+</section>
+
+<div class="lightbox" id="lightbox" onclick="this.classList.remove('on')"><img id="lbImg" alt=""></div>
+
+<!-- ===== REASONS ===== -->
+<section>
+  <h2>Why I'm Hopelessly Yours</h2>
+  <div class="cards" id="cards"></div>
+</section>
+
+<!-- ===== FLIRTY QUESTION ===== -->
+<section>
+  <div class="question">
+    <h2>Quick Question…</h2>
+    <p>Charlaine, do you love me even more than I love you? 😏</p>
+    <div class="btn-row" id="btnRow">
+      <button class="btn" onclick="sayYes()">Yes 💕</button>
+      <button class="btn no" id="noBtn">No 🙄</button>
+    </div>
+    <div id="yesMsg">I knew it! 😘 Mahal na mahal kita!</div>
+  </div>
+</section>
+
+<!-- ===== LOVE LETTER ===== -->
+<section>
+  <h2>A Letter For You</h2>
+  <div class="envelope" id="env" onclick="openLetter()">💌</div>
+  <p style="font-size:.85rem;opacity:.7">tap the envelope</p>
+  <div class="letter" id="letter"></div>
+</section>
+
+<footer>
+  <div class="sig" id="sig">Forever yours 💗</div>
+  <p style="margin-top:8px;opacity:.7">Made with love (and a little code) 💻❤️</p>
+</footer>
+
+<script>
+/* =========================================================
+   ✏️ EDIT THESE! Make it personal for her.
+   ========================================================= */
+const HER_NAME   = "LoveLove";                // her nickname (shown big on top)
+const REAL_NAME  = "Charlaine";               // her real name
+const YOUR_NAME  = "Renz";                    // your name
+
+// 📸 Put your photos inside a folder named "photos" next to index.html
+// and name them 1.jpg, 2.jpg, 3.jpg... (add or remove lines as you like)
+const PHOTOS = [
+  { src: "LL1.jpeg", caption: "Us, being cute 🥰" },
+  { src: "LL2.jpeg", caption: "My favorite person 💕" },
+  { src: "LL3.jpeg", caption: "Best day ever ✨" },
+  { src: "LL4.jpeg", caption: "Forever starts here 💍" }
+];
+const START_DATE = "2024-03-22T00:00:00";     // the day you became official (32 months ago)
+
+const TYPED_TEXT =
+  "32 months, and you still make my heart skip every time I see your name pop up on my phone. 😘";
+
+const REASONS = [
+  "Your smile fixes my worst days in 2 seconds. 😊",
+  "You're beautiful inside and out — unfair, honestly. 😍",
+  "You laugh at my corny jokes (even the bad ones). 😂",
+  "With you, even doing nothing feels like the best date. 🥰",
+  "You support my art, my edits, my dreams — everything. 🎨",
+  "Warning: your hugs are addictive and I'm not recovering. 🤗"
+];
+
+const LETTER =
+`My dearest ${REAL_NAME}, my ${HER_NAME},
+
+32 months. Thirty-two months of laughing with you, learning with you, and choosing you over and over again.
+
+Thank you for staying through the late nights, the busy days, and the times I was too focused on my screen. You've been my peace, my inspiration, and my favorite notification.
+
+I may be good at animating characters, but nothing I've ever made comes close to how beautiful our story is. And I promise to keep adding scenes — only the sweet, funny, and happy ones.
+
+Happy 32nd Monthsary, mahal. I love you more than yesterday, less than tomorrow. 💖
+
+Always yours,
+${YOUR_NAME}`;
+/* ========================================================= */
+
+document.getElementById('herName').textContent = HER_NAME;
+document.getElementById('sig').textContent = `Forever yours, ${YOUR_NAME} 💗`;
+
+/* floating hearts */
+const heartsBox = document.getElementById('hearts');
+const icons = ['💖','💗','💕','💘','🌸','✨'];
+function spawnHeart(){
+  const h = document.createElement('div');
+  h.className = 'heart';
+  h.textContent = icons[Math.floor(Math.random()*icons.length)];
+  h.style.left = Math.random()*100 + 'vw';
+  h.style.fontSize = (14 + Math.random()*26) + 'px';
+  h.style.animationDuration = (6 + Math.random()*6) + 's';
+  heartsBox.appendChild(h);
+  setTimeout(()=>h.remove(), 12500);
+}
+setInterval(spawnHeart, 500);
+
+function burst(){
+  for(let i=0;i<30;i++) setTimeout(spawnHeart, i*50);
+}
+
+/* music (phones block autoplay, so it starts when she taps the first button) */
+const bgm = document.getElementById('bgm');
+const musicBtn = document.getElementById('musicBtn');
+let userPaused = false;
+function syncMusicBtn(){ musicBtn.classList.toggle('playing', !bgm.paused); }
+function startMusic(){
+  if(userPaused || !bgm.paused) return;
+  bgm.play().then(syncMusicBtn).catch(()=>{});
+}
+function toggleMusic(){
+  if(bgm.paused){ userPaused = false; bgm.play().then(syncMusicBtn).catch(()=>{}); }
+  else { userPaused = true; bgm.pause(); syncMusicBtn(); }
+}
+document.querySelector('.hero .btn').addEventListener('click', startMusic);
+
+/* typing effect */
+(function type(){
+  const el = document.getElementById('typed');
+  let i = 0;
+  const t = setInterval(()=>{
+    el.textContent = TYPED_TEXT.slice(0, ++i);
+    if(i >= TYPED_TEXT.length) clearInterval(t);
+  }, 45);
+})();
+
+/* live counter */
+function tick(){
+  const diff = Math.max(0, Date.now() - new Date(START_DATE).getTime());
+  const s = Math.floor(diff/1000);
+  document.getElementById('cd').textContent = Math.floor(s/86400);
+  document.getElementById('ch').textContent = Math.floor(s%86400/3600);
+  document.getElementById('cm').textContent = Math.floor(s%3600/60);
+  document.getElementById('cs').textContent = s%60;
+}
+tick(); setInterval(tick, 1000);
+
+/* photo gallery (photos that fail to load are hidden automatically) */
+const gal = document.getElementById('gallery');
+PHOTOS.forEach((p,i)=>{
+  const f = document.createElement('div');
+  f.className = 'polaroid';
+  f.style.setProperty('--r', (i%2===0 ? -3 : 3) + 'deg');
+  const img = new Image();
+  img.alt = p.caption;
+  img.onerror = ()=>{ f.remove(); if(!gal.children.length) document.getElementById('gallerySec').style.display='none'; };
+  img.src = p.src;
+  f.appendChild(img);
+  f.insertAdjacentHTML('beforeend', `<p>${p.caption}</p>`);
+  f.onclick = ()=>{ document.getElementById('lbImg').src = p.src; document.getElementById('lightbox').classList.add('on'); };
+  gal.appendChild(f);
+});
+
+/* reason cards */
+const cardsBox = document.getElementById('cards');
+REASONS.forEach((r,i)=>{
+  const c = document.createElement('div');
+  c.className = 'card';
+  c.innerHTML = `<div class="num">Reason #${i+1}</div><p>${r}</p>`;
+  cardsBox.appendChild(c);
+});
+const io = new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show'); });
+},{threshold:.2});
+document.querySelectorAll('.card, .polaroid').forEach(c=>io.observe(c));
+
+/* the "No" button runs away */
+const noBtn = document.getElementById('noBtn');
+function dodge(e){
+  e.preventDefault();
+  const row = document.getElementById('btnRow').getBoundingClientRect();
+  const x = (Math.random()-.5) * (row.width - 120);
+  const y = (Math.random()-.5) * 140;
+  noBtn.style.transform = `translate(${x}px, ${y}px)`;
+}
+noBtn.addEventListener('touchstart', dodge, {passive:false});
+noBtn.addEventListener('mouseover', dodge);
+noBtn.addEventListener('click', dodge);
+
+function sayYes(){
+  document.getElementById('yesMsg').style.display = 'block';
+  burst();
+}
+
+/* love letter */
+function openLetter(){
+  const l = document.getElementById('letter');
+  l.textContent = LETTER;
+  l.classList.add('open');
+  document.getElementById('env').textContent = '💖';
+  burst();
+}
+</script>
+</body>
+</html>
